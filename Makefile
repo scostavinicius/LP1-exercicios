@@ -1,19 +1,19 @@
 # Nome do projeto
-PROJ_NAME = programa
+PROJETO = programa
 
 # Compilador
 CXX = g++
 
 # Diretório dos arquivos 
-H_DIR = include
-CPP_DIR = src
+INCLUDE_DIR = include
+SRC_DIR = src
 OBJS_DIR = objects
 
 # Arquivos .cpp dentro e fora de /src
-CPP_SOURCE = $(wildcard $(CPP_DIR)/*.cpp) $(wildcard *.cpp)
+CPP_SOURCE = $(wildcard $(SRC_DIR)/*.cpp) $(wildcard *.cpp)
 
 # Arquivos .h dentro de /include
-H_SOURCE = $(wildcard $(H_DIR)/*.h)
+H_SOURCE = $(wildcard $(INCLUDE_DIR)/*.h)
 
 # Arquivos .o dentro de /objects
 # Essa linha irá pegar o padrão .cpp dentro da lista de arquivos CPP_SOURCE e irá
@@ -28,14 +28,14 @@ CXX_FLAGS = -g -Wall -pedantic
 #
 
 # Executa o target all ao digitar "make all"
-all: $(PROJ_NAME) # Tem como pré-requisito o projeto "programa"
+all: $(PROJETO) # Tem como pré-requisito o projeto "programa"
 
 # Para construir o "programa"
-$(PROJ_NAME): $(OBJS) # Tem como pré-requisito os arquivos objeto
-	$(CXX) $(OBJS) -o $(PROJ_NAME)
+$(PROJETO): $(OBJS) # Tem como pré-requisito os arquivos objeto
+	$(CXX) $(OBJS) -o $(PROJETO)
 
 # Constrói cada arquivo objeto, compilando cada arquivo .cpp em .o
-$(OBJS_DIR)/%.o: $(CPP_DIR)/%.cpp $(H_DIR)/%.h
+$(OBJS_DIR)/%.o: $(SRC_DIR)/%.cpp $(INCLUDE_DIR)/%.h
 #O compilador irá adicionar as Flags e compilar cada arquivo .cpp de acordo com o target objeto
 	$(CXX) $(CXX_FLAGS) -c $< -o $@ 
 
@@ -45,4 +45,4 @@ $(OBJS_DIR)/main.o: main.cpp $(H_SOURCE)
 
 clean:
 	del /Q $(OBJS_DIR)\*.o
-	@if exist $(PROJ_NAME).exe del $(PROJ_NAME).exe
+	@if exist $(PROJETO).exe del $(PROJETO).exe
