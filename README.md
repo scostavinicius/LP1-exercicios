@@ -1,1 +1,1 @@
-# LP1-turma
+# Repositório para exercícios de LP1
